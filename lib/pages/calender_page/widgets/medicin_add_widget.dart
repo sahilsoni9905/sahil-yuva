@@ -12,8 +12,8 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
   final TextEditingController _fromDateController = TextEditingController();
   final TextEditingController _toDateController = TextEditingController();
   final TextEditingController _diagnosisController = TextEditingController();
-  int _selectedButton = -1; // Variable to track the selected button
-  int _selectedImageIndex = -1; // Variable to track the selected image index
+  int _selectedButton = -1; 
+  int _selectedImageIndex = -1; 
 
   @override
   void dispose() {

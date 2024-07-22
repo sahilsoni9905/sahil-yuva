@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_landing_page/pages/home_page/home_page_screen.dart';
+import 'package:new_landing_page/pages/profile_page/profile_page_screen.dart';
 
 class MyBottomNavBar extends StatefulWidget {
   static const String routeName = 'bottom-bar';
@@ -13,7 +14,7 @@ class _MyButtomNavBarState extends State<MyBottomNavBar> {
   int myCurrentIndex = 0;
   List<Widget> pages = [
     const HomePageScreen(), // Use const for page widgets
-    const HomePageScreen(),
+    const ProfilePageScreen(),
     const HomePageScreen(),
     const HomePageScreen(),
   ];
