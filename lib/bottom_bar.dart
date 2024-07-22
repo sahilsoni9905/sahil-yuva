@@ -28,11 +28,12 @@ class _MyButtomNavBarState extends State<MyBottomNavBar> {
       bottomNavigationBar: SafeArea(
         child: Container(
           height: screenHeight * 0.08,
-          margin: EdgeInsets.symmetric(
-              horizontal: screenWidth * 0.10, vertical: 30),
+          margin: EdgeInsets.only(
+              left: screenWidth * 0.10,
+              right: screenWidth * 0.10,
+              bottom: screenHeight * 0.02),
           decoration: BoxDecoration(
-            color: const Color(
-                0xFFD7E5CA), 
+            color: const Color(0xFFD7E5CA),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(

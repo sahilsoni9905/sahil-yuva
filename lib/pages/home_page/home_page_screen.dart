@@ -86,8 +86,8 @@ class HomePageScreen extends StatelessWidget {
                   ),
                   SizedBox(height: screenHeight * 0.03),
                   Expanded(
-                    child: GridView.count(
-                      crossAxisCount: 2,
+                    child: GridView.extent(
+                      maxCrossAxisExtent: screenHeight * 0.36,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 13,
                       children: [

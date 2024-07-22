@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:new_landing_page/landing_page/landing_page_screen.dart';
 import 'package:new_landing_page/models/medicine_models.dart';
@@ -9,13 +10,20 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(MedicineModelAdapter());
   await Hive.openBox<MedicineModel>('medicinesRecords');
+
+  // Lock orientation to portrait mode only
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(const MyApp());
   // runApp(
   //   DevicePreview(
   //     enabled: !kReleaseMode,
   //     builder: (context) => const MyApp(),
   //   ),
-//  );
+  // );
 }
 
 class MyApp extends StatefulWidget {
