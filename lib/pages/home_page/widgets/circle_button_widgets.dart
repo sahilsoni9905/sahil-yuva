@@ -16,9 +16,7 @@ class CircleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, CalenderPageScreen.routeName);
-      },
+      onTap: onPressed,
       child: Container(
         width: 40,
         height: 40,

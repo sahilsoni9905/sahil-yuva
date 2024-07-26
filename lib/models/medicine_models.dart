@@ -1,12 +1,9 @@
-
 import 'package:hive/hive.dart';
-part 'medicine_models.g.dart';  //showing target of uri has not been generated
-enum MedicineType {
-  syrup,
-  tablet, 
-}
+part 'medicine_models.g.dart'; //showing target of uri has not been generated
+
+
 @HiveType(typeId: 0)
-class MedicineModel extends HiveObject{
+class MedicineModel extends HiveObject {
   @HiveField(0)
   late String medicineName;
 
@@ -23,10 +20,13 @@ class MedicineModel extends HiveObject{
   late int numberOfTimesInDay;
 
   @HiveField(5)
-  late List<DateTime> timeToTake;
-
-  @HiveField(6)
   late MedicineType medicineType;
+}
 
-  
+@HiveType(typeId: 1)
+enum MedicineType {
+  @HiveField(0)
+  tablet,
+  @HiveField(1)
+  syrup,
 }

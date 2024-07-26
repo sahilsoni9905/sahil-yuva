@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart'; // Import the intl package
+import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
+import 'package:new_landing_page/models/medicine_models.dart';
+import 'package:new_landing_page/repository/medicine_repository.dart'; // Import the intl package
 
 class AddMedicineDialog extends StatefulWidget {
   @override
@@ -12,8 +15,9 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
   final TextEditingController _fromDateController = TextEditingController();
   final TextEditingController _toDateController = TextEditingController();
   final TextEditingController _diagnosisController = TextEditingController();
-  int _selectedButton = -1; 
-  int _selectedImageIndex = -1; 
+  final _medicineRepository = MedicineRepository();
+  int _selectedButton = -1;
+  int _selectedImageIndex = -1;
 
   @override
   void dispose() {
@@ -22,6 +26,60 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
     _toDateController.dispose();
     _diagnosisController.dispose();
     super.dispose();
+  }
+
+  void saveMedicine() async {
+    if (_medicineController.text.isEmpty ||
+        _fromDateController.text.isEmpty ||
+        _toDateController.text.isEmpty ||
+        _diagnosisController.text.isEmpty ||
+        _selectedButton == -1 ||
+        _selectedImageIndex == -1) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'All fields are mandatory',
+            style: GoogleFonts.josefinSans(),
+          ),
+        ),
+      );
+      return;
+    }
+
+    try {
+      DateTime fromDate = DateFormat('MMM d').parse(_fromDateController.text);
+      DateTime toDate = DateFormat('MMM d').parse(_toDateController.text);
+
+      _medicineRepository.addMedicine(
+        _medicineController.text,
+        _diagnosisController.text,
+        _selectedImageIndex == 0 ? MedicineType.tablet : MedicineType.syrup,
+        fromDate,
+        toDate,
+        _selectedButton,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Medicine Saved',
+            style: GoogleFonts.josefinSans(),
+          ),
+        ),
+      );
+
+      Navigator.of(context).pop();
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'An error occurred: $e',
+            style: GoogleFonts.josefinSans(),
+          ),
+        ),
+      );
+      debugPrint('An error occurred: $e');
+    }
   }
 
   Future<void> _selectDate(
@@ -36,9 +94,7 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
 
     if (pickedDate != null && pickedDate != initialDate) {
       setState(() {
-        // Format to Month Day
-        controller.text =
-            DateFormat('MMM d').format(pickedDate).substring(0, 6);
+        controller.text = DateFormat('MMM d').format(pickedDate);
       });
     }
   }
@@ -255,7 +311,7 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
                             Row(
                               children: [
                                 Text(
-                                  'Diagnosis:',
+                                  'Diagnosis:  ',
                                   style: GoogleFonts.josefinSans(
                                       fontSize: screenHeight * 0.7 * 0.03,
                                       fontWeight: FontWeight.w500,
@@ -415,8 +471,7 @@ class _AddMedicineDialogState extends State<AddMedicineDialog> {
                   padding: EdgeInsets.all(screenWidth * 0.05),
                   child: TextButton(
                     onPressed: () {
-                      // Handle the "Done" button press
-                      Navigator.of(context).pop();
+                      saveMedicine();
                     },
                     child: Text(
                       'Done',

@@ -9,6 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(MedicineModelAdapter());
+  Hive.registerAdapter(MedicineTypeAdapter());
   await Hive.openBox<MedicineModel>('medicinesRecords');
 
   // Lock orientation to portrait mode only

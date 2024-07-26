@@ -16,7 +16,7 @@ class CalenderPageScreen extends StatefulWidget {
 class _CalenderPageScreenState extends State<CalenderPageScreen> {
   @override
   void dispose() {
-    Hive.close();
+   
     super.dispose();
   }
 
@@ -73,11 +73,21 @@ class _CalenderPageScreenState extends State<CalenderPageScreen> {
                       titleTextFormatter: (date, locale) =>
                           DateFormat.MMMM(locale).format(date),
                       titleTextStyle: GoogleFonts.josefinSans(
-                        fontSize: screenHeight * 0.03,
+                        fontSize: screenHeight * 0.035,
                         fontWeight: FontWeight.bold,
                       ),
                       formatButtonVisible: false,
                       titleCentered: true,
+                    ),
+                    daysOfWeekStyle: DaysOfWeekStyle(
+                      weekdayStyle: GoogleFonts.josefinSans(
+                        color: const Color(0xFF053901),
+                        fontSize: screenHeight * 0.017,
+                      ),
+                      weekendStyle: GoogleFonts.josefinSans(
+                        color: const Color(0xFF053901),
+                        fontSize: screenHeight * 0.017,
+                      ),
                     ),
                     calendarBuilders: CalendarBuilders(
                       markerBuilder: (context, date, events) {

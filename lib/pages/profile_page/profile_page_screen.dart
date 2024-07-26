@@ -70,7 +70,7 @@ class ProfilePageScreen extends StatelessWidget {
                       color: Color(0xFF41733D),
                       borderRadius: BorderRadius.circular(22),
                     ),
-                    height: screenHeight * 0.52,
+                    height: screenHeight * 0.56,
                     width: screenWidth * 0.8,
                     child: Padding(
                       padding: EdgeInsets.symmetric(
@@ -188,28 +188,49 @@ class ProfilePageScreen extends StatelessWidget {
                           InkWell(
                             child: Container(
                               height: screenHeight * 0.52 * 0.08,
-                              width: screenWidth * 0.8 * 0.55,
+                              width: screenWidth * 0.8 * 0.33,
                               decoration: BoxDecoration(
-                                color: Colors.transparent,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(
                                   width: 0.8,
                                   color: Color(0xFF92B78F),
                                 ),
                               ),
-                              child: Row(
+                              child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Medical Records',
+                                    'Sign in',
                                     style: GoogleFonts.josefinSans(
-                                        color: Color(0xFFFFE8CD),
+                                        color: Color(0xFF053901),
                                         fontSize:
                                             screenHeight * 0.52 * 0.08 * 0.5),
                                   )
                                 ],
                               ),
                             ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                'To save your',
+                                style: GoogleFonts.josefinSans(
+                                    color: Color(0xFF92B78F),
+                                    fontSize: screenHeight * 0.52 * 0.036),
+                              ),
+                              Text(
+                                'Medical Records',
+                                style: GoogleFonts.josefinSans(
+                                    color: Colors.white,
+                                    fontSize: screenHeight * 0.52 * 0.036,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
                           )
                         ],
                       ),
@@ -235,6 +256,10 @@ class ProfilePageScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Color(0xFF92B78F),
                       shape: BoxShape.circle,
+                    ),
+                    child: Image.asset(
+                      "assets/images/profile_page_dp.png",
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),

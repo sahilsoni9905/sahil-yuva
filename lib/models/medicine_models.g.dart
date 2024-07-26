@@ -22,14 +22,13 @@ class MedicineModelAdapter extends TypeAdapter<MedicineModel> {
       ..toDate = fields[2] as DateTime
       ..diagnosis = fields[3] as String
       ..numberOfTimesInDay = fields[4] as int
-      ..timeToTake = (fields[5] as List).cast<DateTime>()
-      ..medicineType = fields[6] as MedicineType;
+      ..medicineType = fields[5] as MedicineType;
   }
 
   @override
   void write(BinaryWriter writer, MedicineModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.medicineName)
       ..writeByte(1)
@@ -41,8 +40,6 @@ class MedicineModelAdapter extends TypeAdapter<MedicineModel> {
       ..writeByte(4)
       ..write(obj.numberOfTimesInDay)
       ..writeByte(5)
-      ..write(obj.timeToTake)
-      ..writeByte(6)
       ..write(obj.medicineType);
   }
 
@@ -53,6 +50,45 @@ class MedicineModelAdapter extends TypeAdapter<MedicineModel> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is MedicineModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class MedicineTypeAdapter extends TypeAdapter<MedicineType> {
+  @override
+  final int typeId = 1;
+
+  @override
+  MedicineType read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return MedicineType.tablet;
+      case 1:
+        return MedicineType.syrup;
+      default:
+        return MedicineType.tablet;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, MedicineType obj) {
+    switch (obj) {
+      case MedicineType.tablet:
+        writer.writeByte(0);
+        break;
+      case MedicineType.syrup:
+        writer.writeByte(1);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MedicineTypeAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
