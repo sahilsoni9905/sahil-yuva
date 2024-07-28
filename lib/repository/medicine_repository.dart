@@ -18,21 +18,30 @@ class MedicineRepository {
 
   List<MedicineModel> getMedicinesForToday() {
     try {
-      final box = Boxes.getMedicines(); // Assuming Boxes is your storage method
+      final box = Boxes.getMedicines();
       final today = DateTime.now();
-      final startOfDay = DateTime(today.year, today.month, today.day);
-      final endOfDay = startOfDay.add(const Duration(days: 1));
+      final todayMonth = today.month;
+      final todayDay = today.day;
 
       final medicinesForToday = box.values.where((medicine) {
         final medicineFromDate = medicine.fromDate;
         final medicineToDate = medicine.toDate;
-        print('Checking medicine: from $medicineFromDate to $medicineToDate');
+
+        final medicineFromMonthDay =
+            DateTime(today.year, medicineFromDate.month, medicineFromDate.day);
+        final medicineToMonthDay =
+            DateTime(today.year, medicineToDate.month, medicineToDate.day);
+        final startOfDay = DateTime(today.year, todayMonth, todayDay);
+        final endOfDay = startOfDay.add(const Duration(days: 1));
+
+        print(
+            'Checking medicine: from $medicineFromMonthDay to $medicineToMonthDay');
         print('Start of day: $startOfDay, End of day: $endOfDay');
 
-        final isWithinRange = medicineFromDate.isBefore(endOfDay) ||
-            medicineFromDate.isAtSameMomentAs(startOfDay) &&
-                medicineToDate.isAfter(startOfDay) ||
-            medicineToDate.isAtSameMomentAs(endOfDay);
+        final isWithinRange = (medicineFromMonthDay.isBefore(endOfDay) ||
+                medicineFromMonthDay.isAtSameMomentAs(startOfDay)) &&
+            (medicineToMonthDay.isAfter(startOfDay) ||
+                medicineToMonthDay.isAtSameMomentAs(endOfDay));
 
         print('Is within range: $isWithinRange');
         return isWithinRange;

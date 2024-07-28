@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
+import 'package:new_landing_page/models/medicine_models.dart';
 import 'package:new_landing_page/pages/calender_page/widgets/medicin_add_widget.dart';
+import 'package:new_landing_page/repository/medicine_repository.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,9 +16,34 @@ class CalenderPageScreen extends StatefulWidget {
 }
 
 class _CalenderPageScreenState extends State<CalenderPageScreen> {
+  late MedicineRepository _medicineRepository;
+  List<MedicineModel> _medicinesForToday = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _medicineRepository = MedicineRepository();
+    _loadMedicinesForToday();
+  }
+
+  void _loadMedicinesForToday() async {
+    try {
+      List<MedicineModel> medicines =
+          await _medicineRepository.getMedicinesForToday();
+      print('Medicines for today: ${medicines.length}');
+      if (medicines.isEmpty) {
+        print('No medicines found for today');
+      }
+      setState(() {
+        _medicinesForToday = medicines;
+      });
+    } catch (e) {
+      print('Error loading medicines: $e');
+    }
+  }
+
   @override
   void dispose() {
-   
     super.dispose();
   }
 
@@ -127,29 +154,94 @@ class _CalenderPageScreenState extends State<CalenderPageScreen> {
                 Expanded(
                   child: Container(
                     color: Colors.black12,
-                    child: Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AddMedicineDialog();
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AddMedicineDialog();
+                                },
+                              );
                             },
-                          );
-                        },
-                        child: Container(
-                          width: screenWidth * 0.13,
-                          height: screenWidth * 0.13,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color(0xFF92B78F),
+                            child: Container(
+                              width: screenWidth * 0.13,
+                              height: screenWidth * 0.13,
+                              margin: EdgeInsets.symmetric(horizontal: 8),
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xFF92B78F),
+                              ),
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: screenWidth * 0.09,
+                              ),
+                            ),
                           ),
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.white,
-                            size: screenWidth * 0.09,
-                          ),
-                        ),
+                          ..._medicinesForToday.map((medicine) {
+                            return Container(
+                                width: screenWidth * 0.4,
+                                height: screenHeight * 0.24,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(
+                                    width: 2,
+                                    color: medicine.medicineType ==
+                                            MedicineType.tablet
+                                        ? Color(0xFF1E8E15)
+                                        : Color(0xFFA25035),
+                                  ),
+                                  color: medicine.medicineType ==
+                                          MedicineType.tablet
+                                      ? Color(0xFFBFD6AA)
+                                      : Color(0xFFE2B9A6),
+                                ),
+                                margin: EdgeInsets.symmetric(horizontal: 8),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      medicine.medicineName,
+                                      style: GoogleFonts.josefinSans(
+                                          color: medicine.medicineType ==
+                                                  MedicineType.tablet
+                                              ? Color(0xFF053901)
+                                              : Color(0xFFA25035),
+                                          fontSize: screenHeight * 0.24 * 0.15,
+                                          fontWeight: FontWeight.w600),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                    Text(
+                                      '${medicine.numberOfTimesInDay} times a day',
+                                      style: GoogleFonts.josefinSans(
+                                          color: medicine.medicineType ==
+                                                  MedicineType.tablet
+                                              ? Color(0xFF053901)
+                                              : Color(0xFFA25035),
+                                          fontSize: screenHeight * 0.24 * 0.09,
+                                          fontWeight: FontWeight.w400),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                    medicine.medicineType == MedicineType.tablet
+                                        ? Image.asset(
+                                            'assets/images/tablet.png',
+                                            height: screenHeight * 0.24 * 0.55,
+                                          )
+                                        : Image.asset(
+                                            'assets/images/red_syrup.png',
+                                            height: screenHeight * 0.24 * 0.55,
+                                          )
+                                  ],
+                                ));
+                          }).toList(),
+                        ],
                       ),
                     ),
                   ),

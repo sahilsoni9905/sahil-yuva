@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_landing_page/pages/home_page/home_page_screen.dart';
+import 'package:new_landing_page/pages/journal_page/journal_page_screen.dart';
+import 'package:new_landing_page/pages/medical_records_page/medical_records_page_screen.dart';
 import 'package:new_landing_page/pages/profile_page/profile_page_screen.dart';
 
 class MyBottomNavBar extends StatefulWidget {
@@ -13,10 +15,10 @@ class MyBottomNavBar extends StatefulWidget {
 class _MyButtomNavBarState extends State<MyBottomNavBar> {
   int myCurrentIndex = 0;
   List<Widget> pages = [
-    const HomePageScreen(), // Use const for page widgets
+    const HomePageScreen(),
     const ProfilePageScreen(),
-    const HomePageScreen(),
-    const HomePageScreen(),
+    const JournalPageScreen(),
+    const MedicalRecordsPageScreen(),
   ];
 
   @override

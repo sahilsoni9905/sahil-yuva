@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:new_landing_page/pages/profile_page/widgets/auth_dialogue_widgets.dart';
 
 class ProfilePageScreen extends StatelessWidget {
   const ProfilePageScreen({super.key});
@@ -67,7 +68,7 @@ class ProfilePageScreen extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: Color(0xFF41733D),
+                      color: const Color(0xFF41733D),
                       borderRadius: BorderRadius.circular(22),
                     ),
                     height: screenHeight * 0.56,
@@ -98,14 +99,14 @@ class ProfilePageScreen extends StatelessWidget {
                                   Text(
                                     '175',
                                     style: GoogleFonts.josefinSans(
-                                        color: Color(0xFFFFE8CD),
+                                        color: const Color(0xFFFFE8CD),
                                         fontSize: screenHeight * 0.52 * 0.08,
                                         height: screenHeight * 0.52 * 0.002),
                                   ),
                                   Text(
                                     'Height',
                                     style: GoogleFonts.josefinSans(
-                                        color: Color(0xFF92B78F),
+                                        color: const Color(0xFF92B78F),
                                         fontSize: screenHeight * 0.52 * 0.03),
                                   )
                                 ],
@@ -113,7 +114,7 @@ class ProfilePageScreen extends StatelessWidget {
                               Text(
                                 '|',
                                 style: GoogleFonts.josefinSans(
-                                    color: Color(0xFF92B78F),
+                                    color: const Color(0xFF92B78F),
                                     fontSize: screenHeight * 0.52 * 0.16,
                                     fontWeight: FontWeight.w200),
                               ),
@@ -123,14 +124,14 @@ class ProfilePageScreen extends StatelessWidget {
                                   Text(
                                     '55',
                                     style: GoogleFonts.josefinSans(
-                                        color: Color(0xFFFFE8CD),
+                                        color: const Color(0xFFFFE8CD),
                                         fontSize: screenHeight * 0.52 * 0.08,
                                         height: screenHeight * 0.52 * 0.002),
                                   ),
                                   Text(
                                     'Weight',
                                     style: GoogleFonts.josefinSans(
-                                        color: Color(0xFF92B78F),
+                                        color: const Color(0xFF92B78F),
                                         fontSize: screenHeight * 0.52 * 0.03),
                                   )
                                 ],
@@ -146,22 +147,22 @@ class ProfilePageScreen extends StatelessWidget {
                                   Text(
                                     'B+',
                                     style: GoogleFonts.josefinSans(
-                                        color: Color(0xFFFFE8CD),
+                                        color: const Color(0xFFFFE8CD),
                                         fontSize: screenHeight * 0.52 * 0.08,
                                         height: screenHeight * 0.52 * 0.002),
                                   ),
                                   Text(
                                     'Blood Type',
                                     style: GoogleFonts.josefinSans(
-                                        color: Color(0xFF92B78F),
+                                        color: const Color(0xFF92B78F),
                                         fontSize: screenHeight * 0.52 * 0.03),
-                                  )
+                                  ),
                                 ],
                               ),
                               Text(
                                 '|',
                                 style: GoogleFonts.josefinSans(
-                                    color: Color(0xFF92B78F),
+                                    color: const Color(0xFF92B78F),
                                     fontSize: screenHeight * 0.52 * 0.16,
                                     fontWeight: FontWeight.w200),
                               ),
@@ -171,14 +172,14 @@ class ProfilePageScreen extends StatelessWidget {
                                   Text(
                                     '17',
                                     style: GoogleFonts.josefinSans(
-                                        color: Color(0xFFFFE8CD),
+                                        color: const Color(0xFFFFE8CD),
                                         fontSize: screenHeight * 0.52 * 0.08,
                                         height: screenHeight * 0.52 * 0.002),
                                   ),
                                   Text(
                                     'Years old',
                                     style: GoogleFonts.josefinSans(
-                                        color: Color(0xFF92B78F),
+                                        color: const Color(0xFF92B78F),
                                         fontSize: screenHeight * 0.52 * 0.03),
                                   ),
                                 ],
@@ -186,6 +187,13 @@ class ProfilePageScreen extends StatelessWidget {
                             ],
                           ),
                           InkWell(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AuthDialogueWidgets();
+                                  });
+                            },
                             child: Container(
                               height: screenHeight * 0.52 * 0.08,
                               width: screenWidth * 0.8 * 0.33,
@@ -215,13 +223,16 @@ class ProfilePageScreen extends StatelessWidget {
                             height: 10,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 'To save your',
                                 style: GoogleFonts.josefinSans(
                                     color: Color(0xFF92B78F),
                                     fontSize: screenHeight * 0.52 * 0.036),
+                              ),
+                              SizedBox(
+                                width: 10,
                               ),
                               Text(
                                 'Medical Records',
