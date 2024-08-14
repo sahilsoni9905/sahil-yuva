@@ -26,6 +26,24 @@ class _JournalPageScreenState extends State<JournalPageScreen> {
           child: Stack(
             children: [
               Positioned(
+                top: screenHeight * 0.65,
+                left: -1 * screenWidth * 0.1,
+                child: Image.asset(
+                  'assets/images/journal_page_1.png',
+                  fit: BoxFit.cover,
+                  height: screenHeight * 0.11,
+                ),
+              ),
+              Positioned(
+                top: screenHeight * 0.28,
+                left: -1 * screenWidth * 0.13,
+                child: Image.asset(
+                  'assets/images/journal_page_2.png',
+                  fit: BoxFit.cover,
+                  height: screenHeight * 0.4,
+                ),
+              ),
+              Positioned(
                 top: -1 * screenHeight * 0.038,
                 left: -1 * screenWidth * 0.1,
                 child: Image.asset(
@@ -43,10 +61,20 @@ class _JournalPageScreenState extends State<JournalPageScreen> {
                   height: screenHeight * 0.11,
                 ),
               ),
+              Positioned(
+                top: screenHeight * 0.45,
+                left: screenWidth * 0.7,
+                child: Image.asset(
+                  // color: Colors.black,
+                  'assets/images/journal_page_3.png',
+                  fit: BoxFit.cover,
+                  height: screenHeight * 0.6,
+                ),
+              ),
               Column(
                 children: [
                   SizedBox(
-                    height: screenHeight * 0.02,
+                    height: screenHeight * 0.015,
                   ),
                   Center(
                     child: Image.asset(
@@ -55,13 +83,14 @@ class _JournalPageScreenState extends State<JournalPageScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: screenHeight * 0.05,
+                    height: screenHeight * 0.03,
                   ),
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      //crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           decoration: BoxDecoration(
@@ -92,7 +121,7 @@ class _JournalPageScreenState extends State<JournalPageScreen> {
                           },
                         ),
                         SizedBox(
-                          height: screenHeight * 0.03,
+                          height: screenHeight * 0.02,
                         ),
                         Container(
                           decoration: BoxDecoration(
@@ -148,7 +177,7 @@ class _JournalPageScreenState extends State<JournalPageScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: screenHeight * 0.02,
+                          height: screenHeight * 0.015,
                         ),
                         // symptoms
                         Container(
@@ -204,8 +233,65 @@ class _JournalPageScreenState extends State<JournalPageScreen> {
                             ],
                           ),
                         ),
+                        SizedBox(
+                          height: screenHeight * 0.015,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: screenWidth * 0.4 * 0.1,
+                                  vertical: screenHeight * 0.17 * 0.12),
+                              decoration: BoxDecoration(
+                                color: Color(0xFFE2B9A6),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              height: screenHeight * 0.17,
+                              width: screenWidth * 0.4,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Daily\nLog',
+                                    style: GoogleFonts.josefinSans(
+                                        color: Color(0xFFA25035),
+                                        fontSize: screenHeight * 0.17 * 0.19,
+                                        height: screenHeight * 0.17 * 0.008,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  const Spacer(),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: InkWell(
+                                      onTap: () {},
+                                      child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Color(0xFFFFDECE),
+                                        ),
+                                        child: Icon(
+                                          Icons.chevron_right,
+                                          color: Color(0xFFA25035),
+                                          size: 40,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Image.asset(
+                              'assets/images/journal_ipo.png',
+                              height: screenHeight * 0.17 * 0.83,
+                            )
+                          ],
+                        ),
                       ],
                     ),
+                    // here
                   )
                 ],
               ),

@@ -102,9 +102,7 @@ class _RemiderPageScreenState extends State<RemiderPageScreen> {
                     color: const Color(0xFF053901),
                     fontSize: screenHeight * 0.031),
               ),
-              SizedBox(
-                height: screenHeight * 0.02,
-              ),
+
               // ListView.builder to display the medicines
               Expanded(
                 child: ListView.builder(
@@ -116,7 +114,7 @@ class _RemiderPageScreenState extends State<RemiderPageScreen> {
                       child: ReminderContainerWidgets(
                           medicineName: medicine.medicineName,
                           numberOfTimes: medicine.numberOfTimesInDay,
-                          Diagnosis: medicine.diagnosis,
+                          diagnosis: medicine.diagnosis,
                           medType: medicine.medicineType),
                     );
                   },

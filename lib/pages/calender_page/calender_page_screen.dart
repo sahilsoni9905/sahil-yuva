@@ -83,8 +83,10 @@ class _CalenderPageScreenState extends State<CalenderPageScreen> {
                     focusedDay: DateTime.now(),
                     calendarStyle: CalendarStyle(
                       defaultTextStyle: GoogleFonts.josefinSans(
+                          fontSize: screenHeight * 0.02,
                           color: const Color(0xFF053901)),
                       weekendTextStyle: GoogleFonts.josefinSans(
+                        fontSize: screenHeight * 0.02,
                         color: const Color(0xFF053901),
                       ),
                       todayDecoration: const BoxDecoration(
@@ -109,7 +111,7 @@ class _CalenderPageScreenState extends State<CalenderPageScreen> {
                     daysOfWeekStyle: DaysOfWeekStyle(
                       weekdayStyle: GoogleFonts.josefinSans(
                         color: const Color(0xFF053901),
-                        fontSize: screenHeight * 0.017,
+                        fontSize: screenHeight * 0.018,
                       ),
                       weekendStyle: GoogleFonts.josefinSans(
                         color: const Color(0xFF053901),
@@ -136,7 +138,7 @@ class _CalenderPageScreenState extends State<CalenderPageScreen> {
                         'Today, $formattedDate, $dayOfWeek',
                         style: GoogleFonts.josefinSans(
                           color: const Color(0xFF053901),
-                          fontSize: screenHeight * 0.03,
+                          fontSize: screenHeight * 0.032,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -184,6 +186,7 @@ class _CalenderPageScreenState extends State<CalenderPageScreen> {
                           ),
                           ..._medicinesForToday.map((medicine) {
                             return Container(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
                                 width: screenWidth * 0.4,
                                 height: screenHeight * 0.24,
                                 decoration: BoxDecoration(
@@ -202,32 +205,42 @@ class _CalenderPageScreenState extends State<CalenderPageScreen> {
                                 ),
                                 margin: EdgeInsets.symmetric(horizontal: 8),
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      medicine.medicineName,
-                                      style: GoogleFonts.josefinSans(
-                                          color: medicine.medicineType ==
-                                                  MedicineType.tablet
-                                              ? Color(0xFF053901)
-                                              : Color(0xFFA25035),
-                                          fontSize: screenHeight * 0.24 * 0.15,
-                                          fontWeight: FontWeight.w600),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                    ),
-                                    Text(
-                                      '${medicine.numberOfTimesInDay} times a day',
-                                      style: GoogleFonts.josefinSans(
-                                          color: medicine.medicineType ==
-                                                  MedicineType.tablet
-                                              ? Color(0xFF053901)
-                                              : Color(0xFFA25035),
-                                          fontSize: screenHeight * 0.24 * 0.09,
-                                          fontWeight: FontWeight.w400),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          medicine.medicineName,
+                                          style: GoogleFonts.josefinSans(
+                                              color: medicine.medicineType ==
+                                                      MedicineType.tablet
+                                                  ? Color(0xFF053901)
+                                                  : Color(0xFFA25035),
+                                              fontSize:
+                                                  screenHeight * 0.24 * 0.15,
+                                              fontWeight: FontWeight.w600,
+                                              height: 0.5),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                        ),
+                                        Text(
+                                          '${medicine.numberOfTimesInDay} times a day',
+                                          style: GoogleFonts.josefinSans(
+                                              color: medicine.medicineType ==
+                                                      MedicineType.tablet
+                                                  ? Color(0xFF053901)
+                                                  : Color(0xFFA25035),
+                                              fontSize:
+                                                  screenHeight * 0.24 * 0.09,
+                                              fontWeight: FontWeight.w400),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                        ),
+                                      ],
                                     ),
                                     medicine.medicineType == MedicineType.tablet
                                         ? Image.asset(

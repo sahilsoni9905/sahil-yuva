@@ -21,7 +21,7 @@ class YearTextWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(8),
           border: isSelected
               ? Border.all(color: Color(0xFF41733D), width: 2)
               : null,

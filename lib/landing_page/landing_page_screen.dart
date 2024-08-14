@@ -47,7 +47,7 @@ class LandingPageScreen extends StatelessWidget {
                   Text(
                     'To feel 20 again',
                     style: GoogleFonts.josefinSans(
-                        fontSize: screenWidth * 0.08,
+                        fontSize: screenWidth * 0.085,
                         color: const Color(0xFF053901)),
                   ),
                   SizedBox(

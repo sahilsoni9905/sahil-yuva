@@ -32,6 +32,24 @@ class HomePageScreen extends StatelessWidget {
           children: [
             Positioned(
               top: screenHeight * 0.55,
+              left: screenWidth * 0.5,
+              child: Image.asset(
+                'assets/images/home_page_leaf4.png',
+                fit: BoxFit.cover,
+                height: screenHeight * 0.38,
+              ),
+            ),
+            Positioned(
+              top: screenHeight * 0.31,
+              left: screenWidth * 0.4,
+              child: Image.asset(
+                'assets/images/home_page_left3.png',
+                fit: BoxFit.cover,
+                height: screenHeight * 0.3,
+              ),
+            ),
+            Positioned(
+              top: screenHeight * 0.55,
               left: screenWidth * 0.75,
               child: Image.asset(
                 'assets/images/leaf_right_home.png',
@@ -44,7 +62,7 @@ class HomePageScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: screenHeight * 0.02),
+                  SizedBox(height: screenHeight * 0.035),
                   Text(
                     'Hey There,',
                     style: GoogleFonts.josefinSans(
@@ -66,7 +84,7 @@ class HomePageScreen extends StatelessWidget {
                     '$formattedDate, $dayOfWeek',
                     style: GoogleFonts.josefinSans(
                       fontSize: screenHeight * 0.025,
-                      fontWeight: FontWeight.w300,
+                      fontWeight: FontWeight.w400,
                       color: const Color(0xFF054400),
                     ),
                   ),
@@ -92,7 +110,7 @@ class HomePageScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: screenHeight * 0.03),
+                  SizedBox(height: screenHeight * 0.025),
                   Expanded(
                     child: GridView.extent(
                       maxCrossAxisExtent: screenHeight * 0.36,
